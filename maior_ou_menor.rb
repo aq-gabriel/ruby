@@ -1,13 +1,23 @@
 def welcome
-    puts "Bem vindo ao jogo da adivinhação"
-    puts "Qual seu nome?"
-    name = gets
-    puts "\n\n\n"
-    puts "Começaremos o jogo para você, #{name}" 
+    puts
+    puts "        P  /_\\  P                              "
+    puts "       /_\\_|_|_/_\\                             "
+    puts "   n_n | ||. .|| | n_n         Bem vindo ao    "
+    puts "   |_|_|nnnn nnnn|_|_|     Jogo de Adivinhação!"
+    puts "  |' '  |  |_|  |'  ' |                        "
+    puts "  |_____| ' _ ' |_____|                        " 
+    puts "        \\__|_|__/                              "
+    puts
+    puts "Qual é o seu nome?"
+    nome = gets.strip
+    puts "\n\n\n\n\n\n"
+    puts "Começaremos o jogo para você, #{nome}"
 end
 
 def ask_dificulty
-    puts "\nQual o nível de dificuldade que deseja ? (1 facil, 5 dificil)"
+    puts "Qual o nível de dificuldade?"
+    puts "(1) Muito fácil (2) Fácil (3) Normal (4) Difícil (5) Impossível"
+    puts "Escolha: "
     dificulty = gets.to_i
 end
 
@@ -46,7 +56,7 @@ def check_number number_kicked, secret_number
     acertou = number_kicked == secret_number
 
     if acertou
-        puts "\n✔ Acertou" 
+        winner
         return true
     end 
 
@@ -89,12 +99,33 @@ def not_play_again
     i_dont_want_to_play = i_want_play.upcase === 'N'
 end
 
+def winner
+    puts
+    puts "             OOOOOOOOOOO               "
+    puts "         OOOOOOOOOOOOOOOOOOO           "
+    puts "      OOOOOO  OOOOOOOOO  OOOOOO        "
+    puts "    OOOOOO      OOOOO      OOOOOO      "
+    puts "  OOOOOOOO  #   OOOOO  #   OOOOOOOO    "
+    puts " OOOOOOOOOO    OOOOOOO    OOOOOOOOOO   "
+    puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "
+    puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "
+    puts "OOOO  OOOOOOOOOOOOOOOOOOOOOOOOO  OOOO  "
+    puts " OOOO  OOOOOOOOOOOOOOOOOOOOOOO  OOOO   "
+    puts "  OOOO   OOOOOOOOOOOOOOOOOOOO  OOOO    "
+    puts "    OOOOO   OOOOOOOOOOOOOOO   OOOO     "
+    puts "      OOOOOO   OOOOOOOOO   OOOOOO      "
+    puts "         OOOOOO         OOOOOO         "
+    puts "             OOOOOOOOOOOO              "
+    puts
+    puts "               Acertou!                "
+    puts
+end
 welcome
 
 loop do
     dificulty = ask_dificulty
     play dificulty
-    if not_play_again?
+    if not_play_again
         break
     end
 end

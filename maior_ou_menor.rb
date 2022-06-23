@@ -81,18 +81,21 @@ def play dificulty
     puts "\nVocê ganhou #{points_so_far} pontos\n"
 end
 
-def play_again
+def not_play_again
    
     puts "\nDeseja jogar novamente?  (S/N)"
     
     i_want_play = gets.strip
-    i_want_play.upcase === 'S'
+    i_dont_want_to_play = i_want_play.upcase === 'N'
 end
 
 welcome
 
-while play_again
+loop do
     dificulty = ask_dificulty
     play dificulty
+    if not_play_again?
+        break
+    end
 end
 

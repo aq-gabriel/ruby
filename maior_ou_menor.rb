@@ -6,9 +6,28 @@ def welcome
     puts "Começaremos o jogo para você, #{name}" 
 end
 
-def secret_number_draw
-    puts "Escolhendo um numero secreto entre 0 e 200..."
-    number_drawn = 175
+def ask_dificulty
+    puts "\nQual o nível de dificuldade que deseja ? (1 facil, 5 dificil)"
+    dificulty = gets.to_i
+end
+
+def secret_number_draw dificulty
+
+    case dificulty
+    when 1
+        max = 30
+    when 2
+        max = 60
+    when 3
+        max = 100
+    when 4
+        max = 150
+    else
+        max = 200
+    end
+
+    puts "Escolhendo um numero secreto entre 0 e #{max -1 }..."
+    number_drawn = rand(max) + 1
     puts "Escolhido... que tal adivinhar hoje nosso número secreto ?"
     puts "\n\n\n"
     number_drawn
@@ -27,7 +46,7 @@ def check_number number_kicked, secret_number
     acertou = number_kicked == secret_number
 
     if acertou
-        puts "✔ Acertou" 
+        puts "\n✔ Acertou" 
         return true
     end 
 
@@ -41,7 +60,8 @@ def points_to_lose secret_number, number_kicked
 end
 
 welcome
-secret_number = secret_number_draw
+dificulty = ask_dificulty
+secret_number = secret_number_draw dificulty
 points_so_far = 1000
 attempt_limit = 5
 kicks = []
@@ -58,4 +78,5 @@ for attempt in 1..attempt_limit
     end
 end
 
-puts "Você ganhou #{points_so_far} pontos"
+puts "\nO numero secreto é #{secret_number}"
+puts "\nVocê ganhou #{points_so_far} pontos\n"

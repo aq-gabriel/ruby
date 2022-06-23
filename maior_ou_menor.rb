@@ -26,7 +26,7 @@ def secret_number_draw dificulty
         max = 200
     end
 
-    puts "Escolhendo um numero secreto entre 0 e #{max -1 }..."
+    puts "Escolhendo um numero secreto entre 0 e #{max}..."
     number_drawn = rand(max) + 1
     puts "Escolhido... que tal adivinhar hoje nosso número secreto ?"
     puts "\n\n\n"
@@ -59,24 +59,40 @@ def points_to_lose secret_number, number_kicked
     (secret_number - number_kicked).abs / 2.0
 end
 
-welcome
-dificulty = ask_dificulty
-secret_number = secret_number_draw dificulty
-points_so_far = 1000
-attempt_limit = 5
-kicks = []
-
-for attempt in 1..attempt_limit
-
-    number_kicked = ask_number kicks, attempt, attempt_limit
-    kicks << number_kicked
-
-    points_so_far -= points_to_lose secret_number, number_kicked
-
-    if check_number number_kicked, secret_number
-        break
+def play dificulty
+    secret_number = secret_number_draw dificulty
+    points_so_far = 1000
+    attempt_limit = 5
+    kicks = []
+    
+    for attempt in 1..attempt_limit
+    
+        number_kicked = ask_number kicks, attempt, attempt_limit
+        kicks << number_kicked
+    
+        points_so_far -= points_to_lose secret_number, number_kicked
+    
+        if check_number number_kicked, secret_number
+            break
+        end
     end
+    
+    puts "\nO numero secreto é #{secret_number}"
+    puts "\nVocê ganhou #{points_so_far} pontos\n"
 end
 
-puts "\nO numero secreto é #{secret_number}"
-puts "\nVocê ganhou #{points_so_far} pontos\n"
+def play_again
+   
+    puts "\nDeseja jogar novamente?  (S/N)"
+    
+    i_want_play = gets.strip
+    i_want_play.upcase === 'S'
+end
+
+welcome
+
+while play_again
+    dificulty = ask_dificulty
+    play dificulty
+end
+
